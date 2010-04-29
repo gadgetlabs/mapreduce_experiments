@@ -4,6 +4,8 @@ import sys
 from collections import defaultdict
 import string
 from numpy import *
+import csv
+from decimal import *
 
 dict_coords = defaultdict(list)
 
@@ -44,16 +46,33 @@ for line in sys.stdin:
 		# sort into dictionary with a list 
 		coords = (x,y) = value.split(':', 1)
 	
-		coords = [int(x) for x in coords]
+		#coords = [int(x) for x in coords]
+		coords = [float(x) for x in coords]	
 	
 		dict_coords[key].append(coords)
 	except ValueError:
 		# Something wasn't right 
 		pass
 
-print "######################################################"
+counter = 0
 
-for x in dict_coords.items():
+for x in dict_coords.iteritems():
+	
+	#print x
 	result = qhull(x[1])
-	print ""
-	print result
+	key, value = x
+
+	filename = "poly_%s.csv" % counter	
+
+	c = open(filename, "w")
+
+	for y in result:
+		row = "%s,%s\n" % (str(y[0]), str(y[1]))
+		print row
+    		c.write(row)
+
+	counter = counter + 1
+
+	c.close()
+
+

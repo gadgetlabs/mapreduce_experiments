@@ -7,4 +7,4 @@ for line in sys.stdin:
 	
 	words = line.split(',')
 	
-	print "%s\t%s" % (words[0], words[1]
+	print "%s\t%s" % (words[0], words[1])

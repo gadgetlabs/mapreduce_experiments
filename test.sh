@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cat coordinates.csv | ./map.py | ./reduce.py
+cat coordinates.csv | python map.py | python reduce.py
 
 
